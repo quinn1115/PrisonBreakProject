@@ -5,16 +5,19 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteraction
 {
     [SerializeField]
-    private int DoorId;
+    private int DoorId = 0;
     bool doorOpen;
 
     [SerializeField]
+    private float openAmount = 0;
+   
     private Vector3 OpenLocation;
     private Vector3 ClosedLocation;
 
     private void Awake()
     {
-        ClosedLocation = transform.position;
+        ClosedLocation = transform.localPosition;
+        
     }
 
     public void Use()
@@ -23,7 +26,8 @@ public class Door : MonoBehaviour, IInteraction
         {
             Debug.Log("Opening Door");
             doorOpen = true;
-            StartCoroutine(DoorDelay());
+            Inventory.inst.RemoveItem(Inventory.inst.ContainsKey(DoorId));
+           
         }
         else
         {
@@ -36,20 +40,16 @@ public class Door : MonoBehaviour, IInteraction
     {
         if (doorOpen)
         {
-            transform.position = Vector3.Lerp(transform.position, OpenLocation, Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, ClosedLocation + new Vector3(0, 0, openAmount), Time.deltaTime);
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, ClosedLocation, Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, ClosedLocation, Time.deltaTime);
         }
        
     }
 
 
-    IEnumerator DoorDelay()
-    {
-        yield return new WaitForSeconds(15);
-        doorOpen = false;
-    }
+   
 
 }

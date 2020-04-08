@@ -349,7 +349,7 @@ MonoBehaviour:
     showEyeDropper: 1
   maxFogDistance:
     m_OverrideState: 1
-    m_Value: 1520
+    m_Value: 1478.88
     min: 0
   mipFogMaxMip:
     m_OverrideState: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
     m_Value: 0
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 2000
+    m_Value: 10000
   albedo:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -378,7 +378,7 @@ MonoBehaviour:
     showEyeDropper: 1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 5511.3
+    m_Value: 5230
     min: 1
   enableVolumetricFog:
     m_OverrideState: 0

@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class C_Key : C_PickupItem
 {
+    public string itemName;
+    public int itemWeight;
     public int doorId;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Texture itemTexture;
 
     protected override Item CreateItem()
     {
-        return new Item_Access("Key", 1, doorId);
+        return new Item_Access(itemName, itemWeight, doorId, itemTexture);
     }
 }

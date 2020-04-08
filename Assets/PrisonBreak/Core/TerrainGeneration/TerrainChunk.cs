@@ -5,7 +5,7 @@ using UnityEngine;
 public class TerrainChunk
 {
 
-    public Mesh mesh;
+    
     private int Resolution;
     private Vector3 localUp;
     private Vector3 axisA;
@@ -17,8 +17,8 @@ public class TerrainChunk
     private float biomeAmp;
     private Gradient grad;
 
+    public Mesh mesh;
     public Transform transform;
-
     public bool Normalize;
     public MinMax elevationMinMax;
 
@@ -127,5 +127,3 @@ public class TerrainChunk
         return Mathf.Lerp(h1, LayerNoise(Point), biNoise);
     }
 }
-
-

@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.Networking;
 
 
-public class HackingTerminal : MonoBehaviour, IInteraction
+public class HackingTerminal : JSONLoader, IInteraction
 {
     
     public Canvas TerminalUI;
@@ -16,21 +16,18 @@ public class HackingTerminal : MonoBehaviour, IInteraction
     
 
     [SerializeField]
-    private RawImage Img;
+    private RawImage Img = null;
 
     [SerializeField]
-    private string UrlQR;
+    private string UrlQR = "";
     private List<string> log = new List<string>();
     [SerializeField]
-    private Locker LockerDoor;
+    private Locker LockerDoor = null;
 
-
-    private void Awake()
+    private void Start()
     {
         TerminalUI.enabled = false;
-        
     }
-
 
     public void Use()
     {
@@ -68,7 +65,7 @@ public class HackingTerminal : MonoBehaviour, IInteraction
             Debug.Log("Invalid Command");
                 break;
             case "help":
-                log.Add("Commands: \n qr \n meme \n goose\n close \n Pizza \n" + "\n");
+                log.Add("Commands: \n qr \n meme \n goose\n close \n Pizza \n open 'Code' \n Joke \n"  + "\n");
                 UpdateLog();
                 break;
             case "clr":
@@ -80,7 +77,7 @@ public class HackingTerminal : MonoBehaviour, IInteraction
                 StartCoroutine(RequestTexture());
                 break;
             case "meme":
-                System.Diagnostics.Process.Start("https://theuselessweb.com/");
+                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                 break;
             case "goose":
                 System.Diagnostics.Process.Start("https://i.imgur.com/TEryL6h.jpg");
@@ -93,13 +90,18 @@ public class HackingTerminal : MonoBehaviour, IInteraction
                 break;
             case "open":
                 log.Add("Invalid Lock Code usage Example: open 1337");
+                UpdateLog();
                 break;
             case "Pizza":
                 System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=TRgdA9_FsXM");
                 break;
+            case "Joke":
+                StartCoroutine(RequestAPI(URL));
+                break;
         }
         TextInput.text = "";
     }
+
     private void UpdateLog()
     {
         LogText.text = "";
@@ -136,6 +138,17 @@ public class HackingTerminal : MonoBehaviour, IInteraction
                 
             }
         }
+    }
+
+    //Print Joke
+    protected override void ParseJSON(string jsonStr)
+    {
+        base.ParseJSON(jsonStr);
+        log.Add(jsonObj["setup"] + "\n");
+        UpdateLog();
+        log.Add(jsonObj["punchline"] + "\n");
+        UpdateLog();
+        Debug.Log("Print Joke");
     }
 
 }

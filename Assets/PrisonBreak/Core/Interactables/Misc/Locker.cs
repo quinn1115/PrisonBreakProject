@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Locker : MonoBehaviour
 {
-    private bool DoorOpen;
+    private bool DoorOpen = false;
 
     [SerializeField]
-    private Vector3 OpenLocation;
+    private Vector3 OpenLocation = new Vector3(0,0,0);
 
-    // Start is called before the first frame update
     void Start() => DoorOpen = false;
 
-
-    // Update is called once per frame
     void Update()
     {
         if (DoorOpen)
